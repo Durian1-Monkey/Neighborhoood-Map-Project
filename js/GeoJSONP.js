@@ -11,6 +11,7 @@ var Finder = document.getElementById('map');
 Finder.appendChild(googleMap);
 */
 $("#map").append(googleMap);
+//document.getElementById('map').appendChild(googleMap);
 
 
 /*Here is the place to make the list which is the default view*/
