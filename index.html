@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html, body, #map { margin: 0; padding: 0; height: 100%; }
+    </style>
+    <!--This is jQuery library-->
+    <script src="jQuery.js"></script>
+    <!--This is the script which could be the engine of googlemap-->
+    <script src="helper.js"></script>
+  </head>
+  <body>
+    <div id="inputArea">
+      <input></input>
+      <button>search</button>
+    </div>
+    <ul id="list"></ul>
+    <div id="map"></div>
+
+    <!--This is the default data folder.-->
+    <script src="GeoJSONP.js"></script>
+    <!--This is google map apis.-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+
+    <!--The default setting to manage googlemap. If the map doesn't work on properly, instead of the function.-->
+  <script type="text/javascript">
+    if(document.getElementById('map') === null) {
+      document.getElementById('mapDiv').style.display = 'none';
+    }
+  </script>
+  </body>
+</html>
