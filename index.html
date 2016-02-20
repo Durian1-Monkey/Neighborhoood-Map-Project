@@ -4,6 +4,8 @@
     <style>
       html, body, #map { margin: 0; padding: 0; height: 100%; }
     </style>
+    <!--This is knockoutjs-->
+    <script src="js/lib/knockout-3.2.0.js"></script>
     <!--This is jQuery library-->
     <script src="js/jQuery.js"></script>
     <!--This is the script which could be the engine of googlemap-->
@@ -14,7 +16,9 @@
       <input></input>
       <button>search</button>
     </div>
-    <ul id="list"></ul>
+    <ul id="list" data-bind="foreach: bio">
+      <li data-bind="text: $data"></li>
+    </ul>
     <div id="map"></div>
 
     <!--This is the default data folder.-->
@@ -28,6 +32,8 @@
       document.getElementById('mapDiv').style.display = 'none';
     }
   </script>
-    <script src="js/lib/knockout-3.2.0.js"></script>
+
+
+
   </body>
 </html>
