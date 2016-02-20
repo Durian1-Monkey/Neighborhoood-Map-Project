@@ -1,10 +1,21 @@
-var bio = [
-        'Bangkok, Thailand',
-        'Tokyo, Japan',
-        'Osaka, Japan',
-        'Amsterdam, Nederland',
-        'Nicosia, Cyprus'
-    ];
+var bio = ko.observableArray([ 
+        'MRT Sukhumvit',
+        'BTS Udom suk',
+        'BTS Thonglor',
+        'MRT Si Lom',
+        'BTS Asok']);
+
+
+    ko.applyBindings(bio);
+
+//jsonData is now a plain JavaScript object in which nothing is observable. 
+//It's just data.
+var jsonData = ko.toJS(bio);
+//Really? Does jsonData is equivalent to JS object? Test it!
+    
+for (var i=0; i<jsonData.length; i++) {
+    console.log(jsonData[i]);
+}
 //you want to see a map?
 /*
 var Finder = document.getElementById('map');
@@ -12,23 +23,3 @@ Finder.appendChild(googleMap);
 */
 $("#map").append(googleMap);
 //document.getElementById('map').appendChild(googleMap);
-
-
-/*Here is the place to make the list which is the default view*/
-
-//var locations = [];
-var locationLength = bio.length;
-for (var i =0; i < locationLength; i++) {
-//    locations.push(bio[i]);
-
-//make list tag
-var listMaker = document.createElement('li');
-//insert data into list tag
-listMaker.innerHTML = bio[i] + '</br>';
-
-// find ul tag
-var Finder = document.getElementById('list');
-//inside ul tag, append li tag contented location data
-Finder.appendChild(listMaker);
-
-}
