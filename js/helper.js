@@ -39,10 +39,10 @@ function initializeMap() {
             locations.push(bio.contacts[bios].location);
         }*/
 
-        var locationLength = bio.length;
+        var locationLength = jsonData.length;
 
         for (var i =0; i < locationLength; i++) {
-            locations.push(bio[i]);
+            locations.push(jsonData[i]);
         }
 
         return locations;
