@@ -12,21 +12,23 @@
     <script src="js/helper.js"></script>
   </head>
   <body>
+    <!--This is the input section to search what you want-->
     <header> 
       <p3>Results Location Names(<span data-bind="text: search().length"></span>)</p3>
     <form action="#"> 
         <input placeholder="Search" type="search"  data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off"> 
     </form> 
 </header>
-
-
+<!--List searced-->
     <div data-bind="foreach: search()">
       <li data-bind="text: Name, click: $parent.myfunction"></li></div>
   <li data-bind="click: myfunction">Click me</li>
+
     <div id="map"></div>
 
-    <!--This is the default data folder.-->
-    <script src="js/GeoJSONP.js"></script>
+    <!--This is the script which could be the engine of googlemap-->
+    <script src="js/google.js"></script>
+    
     <!--This is google map apis.-->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
