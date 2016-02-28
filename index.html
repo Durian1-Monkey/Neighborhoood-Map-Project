@@ -20,6 +20,9 @@
 </header>
 
 
+    <div data-bind="foreach: search()">
+      <li data-bind="text: Name, click: $parent.myfunction"></li></div>
+  <li data-bind="click: myfunction">Click me</li>
     <div id="map"></div>
 
     <!--This is the default data folder.-->
