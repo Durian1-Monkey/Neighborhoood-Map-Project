@@ -12,13 +12,14 @@
     <script src="js/helper.js"></script>
   </head>
   <body>
-    <div id="inputArea">
-      <input></input>
-      <button>search</button>
-    </div>
-    <ul id="list" data-bind="foreach: bio">
-      <li data-bind="text: $data"></li>
-    </ul>
+    <header> 
+      <p3>Results Location Names(<span data-bind="text: search().length"></span>)</p3>
+    <form action="#"> 
+        <input placeholder="Search" type="search"  data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off"> 
+    </form> 
+</header>
+
+
     <div id="map"></div>
 
     <!--This is the default data folder.-->
