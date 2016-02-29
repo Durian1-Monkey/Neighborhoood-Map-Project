@@ -1,6 +1,7 @@
 var map;
 var markers = [];
 var marker;
+var infoWindow;
 var bio = [
 {
   'Name': 'BTS Udomsuk',
@@ -90,29 +91,21 @@ function addMarker(loc) {
 var ViewModel = function() {
 
     var self = this;
-//test function try click event
-  self.myfunction = function(event) {
-    if(event) {
-      console.log("hi");
 
-//popped up massages
-//      var infowindow = new google.maps.InfoWindow();
-        var infowindow = new google.maps.InfoWindow();
-        for (var i, bioLength = bio.length; i < bioLength; i++) {
-          var box = [];
-          box.push(bio);
-          console.log(box);
-        }
-          infowindow.setContent("windows");
-          infowindow.open(map, marker);
-
-      
-
-//      infoWindow.open(map, loc.marker);
-    } else{
-      console.log("not yet");
+    //popped up massages after clicking
+    self.Locates = function(box1){
+  var ref;
+  for (var i = 0; i <bio.length ; i++) {
+    if(bio[i].Name == box1.Name) {
+      ref = markers[i];
+      var infoWindow = new google.maps.InfoWindow();
+      infoWindow.setContent(bio[i].Name);
+      infoWindow.open(map, ref); 
     }
   }
+};
+
+   
 
 
     self.query = ko.observable('');
