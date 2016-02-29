@@ -47,7 +47,8 @@ function initMap() {
 
   var bioLength = bio.length;
   for(var i=0; i < bioLength; i++) {
-  addMarker(bio[i]);
+    var data = bio[i];
+  addMarker(data);
 }
 ko.applyBindings(new ViewModel());
 }
@@ -89,35 +90,30 @@ function addMarker(loc) {
 var ViewModel = function() {
 
     var self = this;
-
 //test function try click event
-  self.myfunction = function(data, event) {
+  self.myfunction = function(event) {
     if(event) {
-      console.log("helo");
-      var locations = [];
-      for (var j =0; bio.length; j++) {
-      var box1 = locations.push(bio[j]);
-        console.log(box1);
-//        console.log(box1.Name);
+      console.log("hi");
 
-//      var contentString = bio[j].Name;
-      };
-      var contentString = "hi"; //popped up massages
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
+//popped up massages
+//      var infowindow = new google.maps.InfoWindow();
+        var infowindow = new google.maps.InfoWindow();
+        for (var i, bioLength = bio.length; i < bioLength; i++) {
+          var box = [];
+          box.push(bio);
+          console.log(box);
+        }
+          infowindow.setContent("windows");
+          infowindow.open(map, marker);
+
       
-      function ini() {
-        console.log('clicked');
-        infowindow.open(map, marker);
-      };
-      ini();
 
 //      infoWindow.open(map, loc.marker);
     } else{
       console.log("not yet");
     }
   }
+
 
     self.query = ko.observable('');
     
