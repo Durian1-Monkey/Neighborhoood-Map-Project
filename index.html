@@ -25,6 +25,19 @@
 
     <div id="map"></div>
 
+    <!--Wikipedia API-->
+    <!--Wikipedia API input form-->
+    <form id="form-container" class="form-container">
+        <label for="street">Street: </label><input type="text" id="street" value="">
+        <label for="city">City: </label><input type="text" id="city" value="">
+        <button id="submit-btn">Submit</button>
+    </form>
+    <!--Wikipedia API search result-->
+    <div class="wikipedia-container">
+        <h3 id="wikipedia-header">Relevant Wikipedia Links</h3>
+        <ul id="wikipedia-links">Type in an address above and find relevant Wikipedia articles here!</ul>
+    </div>
+
     <!--This is the script which could be the engine of googlemap-->
     <script src="js/google.js"></script>
     
