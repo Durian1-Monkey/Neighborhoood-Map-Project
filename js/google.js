@@ -80,8 +80,14 @@ function addMarker(loc) {
         google.maps.event.addListener(marker, 'click', function() {
             infoWindow.open(map, loc.marker);
             toggleBounce();
+            test();
         });
 
+            function test(){
+              var cityStr = [];
+              cityStr.push(loc.Name);
+              console.log(cityStr);
+            }
 function toggleBounce() {
   if (loc.marker.getAnimation() !== null) {
     loc.marker.setAnimation(null);
@@ -155,3 +161,50 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
 }
+
+//Wikipedia API
+function loadData() {
+
+    var $body = $('body');
+    var $wikiElem = $('#wikipedia-links');
+    var $greeting = $('#greeting');
+
+    // clear out old data before new request
+    $wikiElem.text("");
+
+//    var streetStr = $('#street').val();
+//    var cityStr = $('#city').val();
+    var cityStr = ['udom']; //Add location name 
+console.log(cityStr);//Does this work on correctly?
+
+//    var address = streetStr + ', ' + cityStr;
+
+//    $greeting.text('So, you want to live at ' + address + '?');
+
+    // load wikipedia data
+    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';
+    var wikiRequestTimeout = setTimeout(function(){
+        $wikiElem.text("failed to get wikipedia resources");
+    }, 8000);
+
+    $.ajax({
+        url: wikiUrl,
+        dataType: "jsonp",
+        jsonp: "callback",
+        success: function( response ) {
+            var articleList = response[1];
+
+            for (var i = 0; i < articleList.length; i++) {
+                articleStr = articleList[i];
+                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+            };
+
+            clearTimeout(wikiRequestTimeout);
+        }
+    });
+
+    return false;
+};
+
+$('#form-container').submit(loadData);
