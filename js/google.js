@@ -59,7 +59,9 @@ function addMarker(loc) {
   marker = new google.maps.Marker({
     position: new google.maps.LatLng(loc.lat, loc.lng),
     map: map,
-    title: loc.Name
+    title: loc.Name,
+    draggable: true,
+    animation: google.maps.Animation.DROP
   });
 
   loc.marker = marker;
@@ -77,15 +79,17 @@ function addMarker(loc) {
         // On click open the infoWindow
         google.maps.event.addListener(marker, 'click', function() {
             infoWindow.open(map, loc.marker);
+            toggleBounce();
         });
-        // On mouse over open the infoWindow
-//        google.maps.event.addListener(markers, 'mouseover', function() {
-//            infoWindow.open(map, markers);
-//        });
-        // On mouse out close the infoWindow
-//        google.maps.event.addListener(markers, 'mouseout', function() {
-//            infoWindow.close(map, markers);
-//        });
+
+function toggleBounce() {
+  if (loc.marker.getAnimation() !== null) {
+    loc.marker.setAnimation(null);
+  } else {
+    loc.marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
 }
 
 var ViewModel = function() {
@@ -101,6 +105,7 @@ var ViewModel = function() {
       var infoWindow = new google.maps.InfoWindow();
       infoWindow.setContent(bio[i].Name);
       infoWindow.open(map, ref); 
+    box1.marker.setAnimation(google.maps.Animation.BOUNCE);
     }
   }
 };
