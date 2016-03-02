@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      html, body, #map { margin: 0; padding: 0; height: 100%; }
-    </style>
     <!--This is knockoutjs-->
     <script src="js/lib/knockout-3.2.0.js"></script>
     <!--This is jQuery library-->
     <script src="js/jQuery.js"></script>
     <!--This is the script which could be the engine of googlemap
     <script src="js/helper.js"></script>-->
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   </head>
   <body>
     <!--This is the input section to search what you want-->
@@ -26,12 +25,6 @@
     <div id="map"></div>
 
     <!--Wikipedia API-->
-    <!--Wikipedia API input form-->
-    <form id="form-container" class="form-container">
-        <label for="street">Street: </label><input type="text" id="street" value="">
-        <label for="city">City: </label><input type="text" id="city" value="">
-        <button id="submit-btn">Submit</button>
-    </form>
     <!--Wikipedia API search result-->
     <div class="wikipedia-container">
         <h3 id="wikipedia-header">Relevant Wikipedia Links</h3>
@@ -49,6 +42,20 @@
     if(document.getElementById('map') === null) {
       document.getElementById('mapDiv').style.display = 'none';
     }
+  </script>
+  <script type="text/javascript">
+  function detectBrowser() {
+  var useragent = navigator.userAgent;
+  var mapdiv = document.getElementById("map");
+
+  if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+    mapdiv.style.width = '100%';
+    mapdiv.style.height = '100%';
+  } else {
+    mapdiv.style.width = '600px';
+    mapdiv.style.height = '800px';
+  }
+}
   </script>
 
 
