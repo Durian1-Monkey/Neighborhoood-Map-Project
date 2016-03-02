@@ -8,18 +8,20 @@
     <!--This is the script which could be the engine of googlemap
     <script src="js/helper.js"></script>-->
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   </head>
   <body>
+    <h2>This is the train map</h2>
     <!--This is the input section to search what you want-->
-    <header> 
-      <p3>Results Location Names(<span data-bind="text: search().length"></span>)</p3>
+    <header id="head"> 
+      <p3>Search Results(<span data-bind="text: search().length"></span>)</p3>
     <form action="#"> 
         <input placeholder="Search" type="search"  data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off"> 
     </form> 
 </header>
 <!--List searced-->
-    <div data-bind="foreach: search()">
+    <div data-bind="foreach: search()" id="list">
       <li data-bind="text: Name, click: $parent.Locates"></li></div>
 
     <div id="map"></div>
@@ -40,7 +42,7 @@
     <!--The default setting to manage googlemap. If the map doesn't work on properly, instead of the function.-->
   <script type="text/javascript">
     if(document.getElementById('map') === null) {
-      document.getElementById('mapDiv').style.display = 'none';
+      document.getElementById('map').style.display = 'none';
     }
   </script>
   <script type="text/javascript">
