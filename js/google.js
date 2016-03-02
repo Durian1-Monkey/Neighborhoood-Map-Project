@@ -4,25 +4,30 @@ var marker;
 var infoWindow;
 var bio = [
 {
-  'Name': 'BTS Udomsuk',
+  'Name': 'BTS kokokok',
         'lat': '37.769',
-        'lng': '-112.446'
+        'lng': '-112.446',
+        'description':'description A'
     },{
-        'Name': 'BTS Bdomsuk',
+        'Name': 'BTS',
         'lat': '37.769',
-        'lng': '-102.446'
+        'lng': '-102.446',
+        'description':'description B'
     },{
-        'Name': 'BTS Cdomsuk',
+        'Name': 'MRT',
         'lat': '37.769',
-        'lng': '-120.446'
+        'lng': '-120.446',
+        'description':'description C'
     },{
-        'Name': 'BTS Ddomsuk',
+        'Name': 'BTS',
         'lat': '37.769',
-        'lng': '-122.446'
+        'lng': '-122.446',
+        'description':'description D'
     },{
-        'Name': 'BTS Edomsuk',
+        'Name': 'JR',
         'lat': '37.769',
-        'lng': '-120.446'
+        'lng': '-120.446',
+        'description':'description D'
     }];
     /*
 var locations = [];
@@ -73,7 +78,7 @@ function addMarker(loc) {
         // or hover over a pin on a map. They usually contain more information
         // about a location.
         var infoWindow = new google.maps.InfoWindow({
-            content: loc.Name
+            content: loc.Name + '<br>'+ '<br>' + loc.description
         });
 
         // On click open the infoWindow
@@ -87,14 +92,15 @@ function addMarker(loc) {
               var cityStr = [];
               cityStr.push(loc.Name);
               console.log(cityStr);
+              loadData(cityStr);
+
             }
 function toggleBounce() {
   if (loc.marker.getAnimation() !== null) {
     loc.marker.setAnimation(null);
   } else {
     loc.marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
+  }}
 
 }
 
@@ -109,15 +115,13 @@ var ViewModel = function() {
     if(bio[i].Name == box1.Name) {
       ref = markers[i];
       var infoWindow = new google.maps.InfoWindow();
-      infoWindow.setContent(bio[i].Name);
-      infoWindow.open(map, ref); 
-    box1.marker.setAnimation(google.maps.Animation.BOUNCE);
+      infoWindow.setContent(bio[i].Name + '<br>' + '<br>' + bio[i].description);
+      infoWindow.open(map, ref);
+      loadData(bio[i].Name);
+      box1.marker.setAnimation(google.maps.Animation.BOUNCE);
     }
   }
 };
-
-   
-
 
     self.query = ko.observable('');
     
@@ -134,10 +138,45 @@ var ViewModel = function() {
         });
     });
 };
-//////
-//////
-//////
+//Wikipedia API
+function loadData(str) {
+    var $body = $('body');
+    var $wikiElem = $('#wikipedia-links');
+    var $greeting = $('#greeting');
+    // clear out old data before new request
+    $wikiElem.text("");
 
+var cityStr = str;
+console.log(cityStr);//Does this work on correctly?
+
+    // load wikipedia data
+    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';
+    console.log('loaded');
+    var wikiRequestTimeout = setTimeout(function(){
+        $wikiElem.text("failed to get wikipedia resources");
+    }, 8000);
+
+    $.ajax({
+        url: wikiUrl,
+        dataType: "jsonp",
+        jsonp: "callback",
+        success: function( response ) {
+            var articleList = response[1];
+            for (var i = 0; i < articleList.length; i++) {
+                articleStr = articleList[i];
+                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+            };
+            clearTimeout(wikiRequestTimeout);
+        }
+    });
+    return false;
+};
+
+$('#form-container').submit(loadData);
+
+
+/*
 
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
@@ -161,50 +200,4 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
 }
-
-//Wikipedia API
-function loadData() {
-
-    var $body = $('body');
-    var $wikiElem = $('#wikipedia-links');
-    var $greeting = $('#greeting');
-
-    // clear out old data before new request
-    $wikiElem.text("");
-
-//    var streetStr = $('#street').val();
-//    var cityStr = $('#city').val();
-    var cityStr = ['udom']; //Add location name 
-console.log(cityStr);//Does this work on correctly?
-
-//    var address = streetStr + ', ' + cityStr;
-
-//    $greeting.text('So, you want to live at ' + address + '?');
-
-    // load wikipedia data
-    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';
-    var wikiRequestTimeout = setTimeout(function(){
-        $wikiElem.text("failed to get wikipedia resources");
-    }, 8000);
-
-    $.ajax({
-        url: wikiUrl,
-        dataType: "jsonp",
-        jsonp: "callback",
-        success: function( response ) {
-            var articleList = response[1];
-
-            for (var i = 0; i < articleList.length; i++) {
-                articleStr = articleList[i];
-                var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
-            };
-
-            clearTimeout(wikiRequestTimeout);
-        }
-    });
-
-    return false;
-};
-
-$('#form-container').submit(loadData);
+*/
