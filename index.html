@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <!--This is knockoutjs-->
     <script src="js/lib/knockout-3.2.0.js"></script>
     <!--This is jQuery library-->
@@ -10,57 +11,68 @@
     <link rel="stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  </head>
-  <body>
-    <h2>This is the train map</h2>
+</head>
+
+<body>
     <!--This is the input section to search what you want-->
-    <header id="head"> 
-      <p3>Search Results(<span data-bind="text: search().length"></span>)</p3>
-    <form action="#"> 
-        <input placeholder="Search" type="search"  data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off"> 
-    </form> 
-</header>
-<!--List searced-->
-    <div data-bind="foreach: search()" id="list">
-      <li data-bind="text: Name, click: $parent.Locates"></li></div>
+    <nav id="drawer" class="dark_blue">
+        <p3>Search Results(<span data-bind="text: search().length"></span>)</p3>
+        <form action="#">
+            <input placeholder="Search" type="search" data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off">
+        </form>
 
-    <div id="map"></div>
+        <!--List searced-->
+        <div data-bind="foreach: search()" id="list">
+            <li data-bind="text: Name, click: $parent.Locates"></li>
+        </div>
 
-    <!--Wikipedia API-->
-    <!--Wikipedia API search result-->
-    <div class="wikipedia-container">
-        <h3 id="wikipedia-header">Relevant Wikipedia Links</h3>
-        <ul id="wikipedia-links">Type in an address above and find relevant Wikipedia articles here!</ul>
-    </div>
+        <!--Wikipedia API-->
+        <!--Wikipedia API search result-->
+        <div class="wikipedia-container">
+            <!--<h3 id="wikipedia-header">Relevant Wikipedia Links</h3>-->
+            <h3 id="wikipedia-header">Articles</h3>
+            <ul id="wikipedia-links">Links</ul>
+        </div>
+    </nav>
+    <main class="light_blue">
+        <a id="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z" />
+            </svg>
+        </a>
+        <div id="map"></div>
+    </main>
+
 
     <!--This is the script which could be the engine of googlemap-->
     <script src="js/google.js"></script>
-    
+
     <!--This is google map apis.-->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 
     <!--The default setting to manage googlemap. If the map doesn't work on properly, instead of the function.-->
-  <script type="text/javascript">
-    if(document.getElementById('map') === null) {
-      document.getElementById('map').style.display = 'none';
-    }
-  </script>
-  <script type="text/javascript">
-  function detectBrowser() {
-  var useragent = navigator.userAgent;
-  var mapdiv = document.getElementById("map");
+    <script type="text/javascript">
+        if (document.getElementById('map') === null) {
+            document.getElementById('map').style.display = 'none';
+        }
+    </script>
+    <script type="text/javascript">
+        function detectBrowser() {
+            var useragent = navigator.userAgent;
+            var mapdiv = document.getElementById("map");
 
-  if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
-    mapdiv.style.width = '100%';
-    mapdiv.style.height = '100%';
-  } else {
-    mapdiv.style.width = '600px';
-    mapdiv.style.height = '800px';
-  }
-}
-  </script>
+            if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1) {
+                mapdiv.style.width = '100%';
+                mapdiv.style.height = '100%';
+            } else {
+                mapdiv.style.width = '600px';
+                mapdiv.style.height = '800px';
+            }
+        }
+    </script>
 
 
 
-  </body>
+</body>
+
 </html>
