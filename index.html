@@ -2,15 +2,10 @@
 <html>
 
 <head>
-    <!--This is knockoutjs-->
-    <script src="js/lib/knockout-3.2.0.js"></script>
     <!--This is jQuery library-->
     <script src="js/jQuery.js"></script>
-    <!--This is the script which could be the engine of googlemap
-    <script src="js/helper.js"></script>-->
-    <link rel="stylesheet" href="style.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <!--This is knockoutjs-->
+    <script src="js/lib/knockout-3.2.0.js"></script>
 </head>
 
 <body>
@@ -18,7 +13,7 @@
     <nav id="drawer" class="dark_blue">
         <p3>Search Results(<span data-bind="text: search().length"></span>)</p3>
         <form action="#">
-            <input placeholder="Search" type="search" data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off" id="input">
+            <input placeholder="Search" type="search" data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off">
         </form>
 
         <!--List searced-->
@@ -73,6 +68,9 @@
 
 
 
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 </body>
 
 </html>
