@@ -45,26 +45,6 @@
     <!--This is google map apis.-->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 
-    <!--The default setting to manage googlemap. If the map doesn't work on properly, instead of the function.-->
-    <script type="text/javascript">
-        if (document.getElementById('map') === null) {
-            document.getElementById('map').style.display = 'none';
-        }
-    </script>
-    <script type="text/javascript">
-        function detectBrowser() {
-            var useragent = navigator.userAgent;
-            var mapdiv = document.getElementById("map");
-
-            if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1) {
-                mapdiv.style.width = '100%';
-                mapdiv.style.height = '100%';
-            } else {
-                mapdiv.style.width = '600px';
-                mapdiv.style.height = '800px';
-            }
-        }
-    </script>
 
 
 
