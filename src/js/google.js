@@ -136,6 +136,8 @@ var ViewModel = function() {
                 infoWindow.open(map, ref);
                 loadData(locations[i].Name);
                 box1.marker.setAnimation(google.maps.Animation.BOUNCE);
+            //setTimeout(box1.marker.setAnimation(null), 700);
+            google.maps.event.trigger(ref, 'click');
             }
         }
     };
