@@ -1,8 +1,8 @@
-var map;
-var markers = [];
-var marker;
-var infoWindow;
-var locations = [{
+var map,
+markers = [],
+marker,
+infoWindow,
+locations = [{
     'Name': 'Terminal 21',
     'lat': '13.737920',
     'lng': '100.560416',
@@ -91,9 +91,12 @@ function addMarker(loc) {
         content: loc.Name + '<br>' + '<br>' + loc.description
     });
 
+
     // On click open the infoWindow
     google.maps.event.addListener(marker, 'click', function() {
+        
         infoWindow.open(map, loc.marker);
+        console.log("open");
         toggleBounce();
         test();
     });
@@ -111,6 +114,8 @@ function addMarker(loc) {
             loc.marker.setAnimation(null);
         } else {
             loc.marker.setAnimation(google.maps.Animation.BOUNCE);
+            console.log("bound?");
+            setTimeout(loc.marker.setAnimation(null), 700);
         }
     }
 
@@ -178,12 +183,12 @@ function loadData(str) {
                 articleStr = articleList[i];
                 var url = 'http://en.wikipedia.org/wiki/' + articleStr;
                 $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
-            };
+            }
             clearTimeout(wikiRequestTimeout);
         }
     });
     return false;
-};
+}
 
 $('#form-container').submit(loadData);
 
