@@ -87,6 +87,7 @@ function addMarker(loc) {
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
+    
     var infoWindow = new google.maps.InfoWindow({
         content: loc.Name + '<br>' + '<br>' + loc.description
     });
@@ -99,6 +100,7 @@ function addMarker(loc) {
         console.log("open");
         toggleBounce();
         test();
+        map.panTo(marker.getPosition());
     });
 
     function test() {
@@ -106,8 +108,8 @@ function addMarker(loc) {
         cityStr.push(loc.Name);
         console.log(cityStr);
         loadData(cityStr);
-
     }
+
 
     function toggleBounce() {
         if (loc.marker.getAnimation() !== null) {
