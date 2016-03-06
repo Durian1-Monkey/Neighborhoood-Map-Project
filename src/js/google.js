@@ -88,7 +88,7 @@ function addMarker(loc) {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     
-    var infoWindow = new google.maps.InfoWindow({
+    infoWindow = new google.maps.InfoWindow({
         content: loc.Name + '<br>' + '<br>' + loc.description
     });
 
@@ -96,20 +96,12 @@ function addMarker(loc) {
     // On click open the infoWindow
     google.maps.event.addListener(marker, 'click', function() {
         
+//        infoWindow.close();
         infoWindow.open(map, loc.marker);
         console.log("open");
         toggleBounce();
-        test();
         map.panTo(marker.getPosition());
     });
-
-    function test() {
-        var cityStr = [];
-        cityStr.push(loc.Name);
-        console.log(cityStr);
-        loadData(cityStr);
-    }
-
 
     function toggleBounce() {
         if (loc.marker.getAnimation() !== null) {
@@ -133,7 +125,7 @@ var ViewModel = function() {
         for (var i = 0; i < locations.length; i++) {
             if (locations[i].Name == box1.Name) {
                 ref = markers[i];
-                var infoWindow = new google.maps.InfoWindow();
+                //infoWindow = new google.maps.InfoWindow();
                 infoWindow.setContent(locations[i].Name + '<br>' + '<br>' + locations[i].description);
                 infoWindow.open(map, ref);
                 loadData(locations[i].Name);
@@ -161,9 +153,7 @@ var ViewModel = function() {
 };
 //Wikipedia API
 function loadData(str) {
-    var $body = $('body');
     var $wikiElem = $('#wikipedia-links');
-    var $greeting = $('#greeting');
     // clear out old data before new request
     $wikiElem.text("");
 
