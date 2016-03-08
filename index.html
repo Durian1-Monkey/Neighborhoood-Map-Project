@@ -1,53 +1,26 @@
 <!DOCTYPE html>
-<html>
 
 <head>
-    <!--This is jQuery library-->
-    <script src="js/jQuery.js"></script>
-    <!--This is knockoutjs-->
-    <script src="js/lib/knockout-3.2.0.js"></script>
-</head>
-
-<body>
-    <!--This is the input section to search what you want-->
-    <nav id="drawer" class="dark_blue">
-        <p3>Search Results(<span data-bind="text: search().length"></span>)</p3>
-        <form action="#">
-            <input placeholder="Search" type="search" data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off">
-        </form>
-
-        <!--List searced-->
-        <div data-bind="foreach: search()" id="list">
-            <li data-bind="text: Name, click: $parent.Locates"></li>
-        </div>
-
-        <!--Wikipedia API-->
-        <!--Wikipedia API search result-->
-        <div class="wikipedia-container">
-            <!--<h3 id="wikipedia-header">Relevant Wikipedia Links</h3>-->
-            <h3 id="wikipedia-header">Articles</h3>
-            <ul id="wikipedia-links">Links</ul>
-        </div>
-    </nav>
-    <main class="light_blue">
-        <a id="menu">
-            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
-                <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
-            </svg>
-        </a>
-        <div id="map"></div>
-    </main>
-
-
-    <!--This is the script which could be the engine of googlemap-->
-    <script src="js/google.js"></script>
-
-    <!--This is google map apis.-->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+    <title>Neighborhood Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
     <style type="text/css">
-html,
-body {
-  font-family: 'Open Sans Condensed', sans-serif;
+nav {
+  height: 100%;
+}
+
+nav {
+  color: #999;
+}
+
+input,
+nav {
+  width: 300px;
+}
+
+body,
+html {
+  font-family: 'Open Sans Condensed',sans-serif;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -62,59 +35,28 @@ a#menu svg {
 }
 
 nav {
-  /*this is nav tag*/
-  background-color: rgb(0, 0, 0);
-  height: 40%;
-  /*  left: 0px;*/
+  background-color: #000;
   z-index: 10;
-  position: fixed;
-  /*  padding: 0 0 10px 0;*/
   font-size: 24px;
-  color: #999;
-  opacity: 0.7;
   box-sizing: border-box;
-}
-
-#list {
-  font-size: 20px;
-  color: #999;
+  position: absolute;
+  -webkit-transform: translate(-300px,0);
+  transform: translate(-300px,0);
+  opacity: .7;
 }
 
 input {
-  /*  padding-right: 40px;*/
   background-color: #fff;
   background-image: none;
   height: 30px;
-  width: 300px;
 }
 
-.wikipedia-container {
-  background-color: rgb(0, 0, 0);
-  /*  position: fixed;
-  z-index: 5;
-  position: relative;
-  margin-left: 0px;
-  height: 70%;*/
-  margin-top: 10%;
-}
-
-nav {
-  width: 300px;
-  height: 100%;
-  position: absolute;
-  /* This trasform moves the drawer off canvas. */
-  -webkit-transform: translate(-300px, 0);
-  transform: translate(-300px, 0);
-  /* Optionally, we animate the drawer. */
-  opacity: 0.7;
-}
-
-@media (min-width: 600px) {
+@media (min-width:600px) {
   nav {
     position: fixed;
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
-    opacity: 0.7;
+    -webkit-transform: translate(0,0);
+    transform: translate(0,0);
+    opacity: .7;
   }
 
   body {
@@ -131,11 +73,11 @@ nav {
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width:800px) {
   nav {
     position: fixed;
     z-index: 10;
-    opacity: 0.7;
+    opacity: .7;
   }
 
   a#menu svg {
@@ -151,10 +93,42 @@ nav {
 </script>
 <noscript>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300">
 </noscript>
     
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+</head>
+
+<body>
+    <!--This is the input section to search what you want-->
+    <nav id="drawer">
+        <p>Search Results(<span data-bind="text: search().length"></span>)</p>
+        <form action="#">
+            <input placeholder="Search" type="search" data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off">
+        </form>
+
+        <!--List searced-->
+        <ul data-bind="foreach: search()" id="list">
+            <li data-bind="text: Name, click: $parent.Locates"></li>
+        </ul>
+    </nav>
+    <main class="light-blue">
+        <a id="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+                <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
+            </svg>
+        </a>
+        <div id="map"></div>
+    </main>
+
+    <!--This is google map apis.-->
+    <script async type="text/javascript" onerror="googleError()" src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+    <!--This is the script which could be the engine of googlemap-->
+    <script async src="js/google.js"></script>
+
+    <!--This is jQuery library-->
+    <script src="js/jQuery.js"></script>
+    <!--This is knockoutjs-->
+    <script src="js/lib/knockout-3.2.0.js"></script>
+
 </body>
 
-</html>
