@@ -1,8 +1,10 @@
 #Udacity Project5-1: Neighborhoood-Map-Project
-This is part of the Front-end Web Developer nanodegree from udacity. The project utilizes <a href="https://www.udacity.com/course/viewer#!/c-ud110-nd">Intro to AJAX</a> and <a href="https://www.udacity.com/course/viewer#!/c-ud989-nd">JavaScript Design Patterns</a>
+This is part of the Front-end Web Developer nanodegree from udacity. The project utilizes [Intro to AJAX](https://www.udacity.com/course/viewer#!/c-ud110-nd) and [JavaScript Design Patterns](https://www.udacity.com/course/viewer#!/c-ud989-nd)
+
+
 
 ##Usage
-Access <a href="http://durian1-monkey.github.io/Neighborhoood-Map-Project/">index.html file</a>
+Access [index.html file](http://durian1-monkey.github.io/Neighborhoood-Map-Project/)
 
 ##Digest
 This is a single-page application featuring a map of my neighborhood and a neigborhood which I would like to visit. This application has the several functionalities: map markers to identify popular locations and places I love to visit, a search function to easily discover these locations, and a listvies to support simple brwsing of all locations. As additional third-party APIs, Wikipedia articles are provided information about each locations and places. 
