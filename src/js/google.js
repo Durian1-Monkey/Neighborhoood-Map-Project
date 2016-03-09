@@ -100,7 +100,7 @@ function addMarker(loc) {
 
         //      infoWindow.close();
         toggleBounce();
-        infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<div id ="content">' + '</div>');
+        infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div id ="content">' + '</div>');
         console.log("open");
         loadData(loc.Name);
         infoWindow.open(map, loc.marker);
@@ -133,7 +133,7 @@ function addMarker(loc) {
         var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
         console.log(wikiUrl);
         var wikiRequestTimeout = setTimeout(function() {
-            $wikiElem.text("failed to get wikipedia resources");
+            $wikiElem.append("Failed to get wikipedia resources");
         }, 8000);
 
         $.ajax({
