@@ -65,7 +65,6 @@ function initMap() {
     for (var i = 0; i < locationsLength; i++) {
         var data = locations[i];
         addMarker(data);
-        //     loadData(data);
     }
     ko.applyBindings(new ViewModel());
 }
@@ -84,21 +83,11 @@ function addMarker(loc) {
 
     markers.push(marker);
 
-
-    // infoWindows are the little helper windows that open when you click
-    // or hover over a pin on a map. They usually contain more information
-    // about a location.
-    /*
-    infoWindow = new google.maps.InfoWindow({
-        content: loc.Name + '<br>' + '<br>' + loc.description
-    });
-    */
     infoWindow = new google.maps.InfoWindow();
 
     // On click open the infoWindow
     google.maps.event.addListener(marker, 'click', function() {
 
-        //      infoWindow.close();
         toggleBounce();
         infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div id ="content">' + '</div>');
         console.log("open");
@@ -121,19 +110,13 @@ function addMarker(loc) {
     //Wikipedia API
     function loadData(str) {
         var $wikiElem = $('#content');
-        // clear out old data before new request
-        // $wikiElem.text("");
-
-        //    var cityStr = str;
-
-        //    console.log(cityStr); //Does this work on correctly?
 
         // load wikipedia data
-        //    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';
         var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
         console.log(wikiUrl);
         var wikiRequestTimeout = setTimeout(function() {
             $wikiElem.append("Failed to get wikipedia resources");
+            return "Failed to get wikipedia resources";
         }, 8000);
 
         $.ajax({
@@ -146,6 +129,7 @@ function addMarker(loc) {
                     articleStr = articleList[i];
                     var url = 'http://en.wikipedia.org/wiki/' + articleStr;
                     $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+                    return '<li><a href="' + url + '">' + articleStr + '</a></li>';
                 }
                 clearTimeout(wikiRequestTimeout);
             }
@@ -163,11 +147,6 @@ var ViewModel = function() {
         for (var i = 0; i < locations.length; i++) {
             if (locations[i].Name == box1.Name) {
                 ref = markers[i];
-                //infoWindow = new google.maps.InfoWindow();
-                box1.marker.setAnimation(google.maps.Animation.BOUNCE);
-                //setTimeout(box1.marker.setAnimation(null), 700);
-                infoWindow.setContent(locations[i].Name + '<br>' + '<br>' + locations[i].description + '<br>' + '<div id ="content">' + '</div>');
-                infoWindow.open(map, ref);
                 google.maps.event.trigger(ref, 'click');
             }
         }
