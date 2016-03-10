@@ -30,15 +30,20 @@
         <div id="map"></div>
     </main>
 
-    <!--This is google map apis.-->
-    <script async type="text/javascript" onerror="googleError()" src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
-    <!--This is the script which could be the engine of googlemap-->
-    <script async src="js/google.js"></script>
-
     <!--This is jQuery library-->
     <script src="js/jQuery.js"></script>
     <!--This is knockoutjs-->
     <script src="js/lib/knockout-3.2.0.js"></script>
+
+    <script>
+        function googleError() {
+            alert('Google Map doesn not invoke correctly.');
+        }
+    </script>
+    <!--This is the script which could be the engine of googlemap-->
+    <script src="js/google.js"></script>
+    <!--This is google map apis.-->
+    <script async type="text/javascript" onerror="googleError()" src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 
 </body>
 
