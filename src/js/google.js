@@ -6,7 +6,7 @@ var map,
         'Name': 'Terminal 21',
         'lat': '13.737920',
         'lng': '100.560416',
-        'description': 'You can buy whatever you want here. </br>I often come here to buy books and small presents for my pals and family members. </br>This shopping mall is easy to access from BTS Asok.'
+        'description': 'You can buy whatever you want here. </br>I often come here to buy books and small presents for my pals and family members. </br>This shopping mall is easy to access from BTS Asok.Termial 21 is for shopping and cheap items and cloths and suveniors. The products are a bit pricy for foreigners to be compared with local products. My fried bought my present here.'
     }, {
         'Name': 'Wat Arun',
         'lat': '13.743719',
@@ -67,6 +67,8 @@ function initMap() {
         addMarker(data);
     }
     ko.applyBindings(new ViewModel());
+
+
 }
 
 // Adds a marker to the map and push to the array.
@@ -106,7 +108,7 @@ function addMarker(loc) {
         }
     }
     ///////////////////////////////////////////////////////////
-
+/*
     //Wikipedia API
     function loadData(str) {
         var $wikiElem = $('#content');
@@ -130,6 +132,48 @@ function addMarker(loc) {
                     var url = 'http://en.wikipedia.org/wiki/' + articleStr;
                     $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
                     return '<li><a href="' + url + '">' + articleStr + '</a></li>';
+                }
+                clearTimeout(wikiRequestTimeout);
+            }
+        });
+        return false;
+    }
+    */
+    //Wikipedia API
+    function loadData(str) {
+//        var $wikiElem = $('#content');
+
+//                    var finder = document.getElementById("content"); //Find the infoWindow.setContent
+        // load wikipedia data
+        var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
+        console.log(wikiUrl);
+        var wikiRequestTimeout = setTimeout(function() {
+//            $wikiElem.append("Failed to get wikipedia resources");
+                    var finder = document.getElementById("content"); //Find the infoWindow.setContent
+            var errorcomment = "Failed to get wikipedia resources"; //Make error commment
+           // var errorcomment = localStorage.setItem("Failed to get wikipedia resources");
+           localStorage.setItem('error', errorcomment)// set error comment in keyname error 
+           var error = localStorage.getItem('error')// get keyname error and contain it in variable error
+            finder.innerHTML = error;//Inside the infoWindow, add error varliable
+        }, 8000);
+
+        $.ajax({
+            url: wikiUrl,
+            dataType: "jsonp",
+            jsonp: "callback",
+            success: function(response) {
+                var articleList = response[1];
+                for (var i = 0; i < articleList.length; i++) {
+                    articleStr = articleList[i];
+                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    var finder = document.getElementById("content"); //Find the infoWindow.setContent
+                    var maker = '<li><a href="' + url + '">' + articleStr + '</a></li>';//Make wikipedia link                    
+                    localStorage.setItem('articlelink', maker)// set maker variable in keyname articlelink
+                    var getdata = localStorage.getItem('articlelink')//get keyname articlelink
+                    console.log(getdata); //test it
+            finder.innerHTML = getdata;//Inside the infoWindow, add maker varliable
+
+
                 }
                 clearTimeout(wikiRequestTimeout);
             }
