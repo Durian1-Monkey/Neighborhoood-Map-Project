@@ -1,0 +1,4 @@
+# exclude modules
+node_modules
+# exclude cache created by gulp-gh-pages plugin
+.publish

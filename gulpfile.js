@@ -6,8 +6,11 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
     livereload = require('gulp-livereload'),
-    browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync').create(),
+    critical = require('critical').stream;
 
+//var    beautify = require('gulp-beautify');
+var ghPages = require('gulp-gh-pages');
 
 gulp.task('default', () => {
     console.log("Helo");
@@ -30,9 +33,30 @@ gulp.task('styles', function () {
     return gulp.src('src/style.css')
     .pipe(cssmin())
   //  .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('dist/'))
     .pipe(livereload());
+});
+
+//Generate & Inline Critical-path CSS
+gulp.task('critical', function() {
+    return gulp.src('src/*.html')
+    .pipe(critical({base: 'dist/', inline: true, css:['dist/style.css']}))
+    .pipe(gulp.dest('dist/*.html'))
+});
+
+/*
+//Beautify JS file
+gulp.task('beautify', function() {
+    gulp.src('src/js/google.js')
+    .pipe(beautify({indentSize: 4}))
+    .pipe(gulp.dest('src/js/google.js'))
+})
+*/
+
+//Deploy gh-pages
+gulp.task('deploy', function() {
+    return gulp.src('dist/**/*')
+    .pipe(ghPages());
 });
 
 //Watches JS
@@ -40,9 +64,10 @@ gulp.task('watch', function() {
 
     var server = livereload();
 
+//    gulp.watch('src/js/google.js', ['beautify']);
     gulp.watch('src/js/google.js', ['scripts']);
-//    gulp.watch('src/*.html', ['scripts']);
     gulp.watch('src/style.css', ['styles']);
+    gulp.watch('src/*.html', ['critical']);
 });
 
 
@@ -75,9 +100,6 @@ gulp.task('serve', ['js'], function () {
     gulp.watch("src/js/*.js", ['js-watch']);
 });
 */
-//gulp.task('default', ['watch', 'js', 'js-watch', 'serve']);
-gulp.task('default', ['watch', 'scripts', 'styles']);
 
-
-
-
+//gulp.task('default', ['watch', 'scripts', 'styles', 'critical', 'beautify']);
+gulp.task('default', ['watch', 'scripts', 'styles', 'critical' ,'deploy']);

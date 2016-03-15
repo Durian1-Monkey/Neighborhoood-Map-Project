@@ -1,6 +1,7 @@
 var map,
     markers = [],
     marker,
+    iconBase,
     infoWindow,
     locations = [{
         'Name': 'Terminal 21',
@@ -73,12 +74,14 @@ function initMap() {
 
 // Adds a marker to the map and push to the array.
 function addMarker(loc) {
+    iconBase = 'icon.png';
     marker = new google.maps.Marker({
         position: new google.maps.LatLng(loc.lat, loc.lng),
         map: map,
         title: loc.Name,
         draggable: true,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        icon: iconBase
     });
 
     loc.marker = marker;
@@ -107,51 +110,14 @@ function addMarker(loc) {
             setTimeout(loc.marker.setAnimation(null), 700);
         }
     }
-    ///////////////////////////////////////////////////////////
-/*
     //Wikipedia API
     function loadData(str) {
-        var $wikiElem = $('#content');
-
         // load wikipedia data
         var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
         console.log(wikiUrl);
         var wikiRequestTimeout = setTimeout(function() {
-            $wikiElem.append("Failed to get wikipedia resources");
-            return "Failed to get wikipedia resources";
-        }, 8000);
-
-        $.ajax({
-            url: wikiUrl,
-            dataType: "jsonp",
-            jsonp: "callback",
-            success: function(response) {
-                var articleList = response[1];
-                for (var i = 0; i < articleList.length; i++) {
-                    articleStr = articleList[i];
-                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                    $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
-                    return '<li><a href="' + url + '">' + articleStr + '</a></li>';
-                }
-                clearTimeout(wikiRequestTimeout);
-            }
-        });
-        return false;
-    }
-    */
-    //Wikipedia API
-    function loadData(str) {
-//        var $wikiElem = $('#content');
-
-//                    var finder = document.getElementById("content"); //Find the infoWindow.setContent
-        // load wikipedia data
-        var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
-        console.log(wikiUrl);
-        var wikiRequestTimeout = setTimeout(function() {
-//            $wikiElem.append("Failed to get wikipedia resources");
                     var finder = document.getElementById("content"); //Find the infoWindow.setContent
             var errorcomment = "Failed to get wikipedia resources"; //Make error commment
-           // var errorcomment = localStorage.setItem("Failed to get wikipedia resources");
            localStorage.setItem('error', errorcomment)// set error comment in keyname error 
            var error = localStorage.getItem('error')// get keyname error and contain it in variable error
             finder.innerHTML = error;//Inside the infoWindow, add error varliable

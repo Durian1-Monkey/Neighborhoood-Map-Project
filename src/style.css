@@ -14,16 +14,10 @@ a#menu svg {
     display: block;
 }
 nav {
-    /*this is nav tag*/
-    
     background-color: rgb(0, 0, 0);
     height: 40%;
-    /*  left: 0px;*/
-    
     z-index: 10;
     position: fixed;
-    /*  padding: 0 0 10px 0;*/
-    
     font-size: 24px;
     color: #999;
     opacity: 0.7;
@@ -41,8 +35,6 @@ h2 {
     font-size: 30px;
 }
 input {
-    /*  padding-right: 40px;*/
-    
     background-color: #fff;
     background-image: none;
     height: 30px;
@@ -50,12 +42,6 @@ input {
 }
 .wikipedia-container {
     background-color: rgb(0, 0, 0);
-    /*  position: fixed;
-  z-index: 5;
-  position: relative;
-  margin-left: 0px;
-  height: 70%;*/
-    
     margin-top: 10%;
 }
 /*
