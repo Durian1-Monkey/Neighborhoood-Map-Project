@@ -20,4 +20,6 @@ This is a single-page application featuring a map of my neighborhood and a neigb
 1. Minify CSS: gulp-cssmin.
 1. Minify JavaScript: gulp-jsmin.
 1. Inline CSS into HTML: Critical plugin.
-1. Rename files after taking actions: gulp-rename.
+1. Live reload: gulp-livereload
+1. Beautify JS code: gulp-beautify.
+1. Publish : gulp-gh-pages.
