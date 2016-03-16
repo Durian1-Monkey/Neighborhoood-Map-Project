@@ -94,7 +94,7 @@ function addMarker(loc) {
     google.maps.event.addListener(marker, 'click', function() {
 
         toggleBounce();
-        infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div id ="content">' + '</div>');
+        infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div data-bind ="text: Links">' + '</div>');
         console.log("open");
         loadData(loc.Name);
         infoWindow.open(map, loc.marker);
@@ -110,6 +110,7 @@ function addMarker(loc) {
             setTimeout(loc.marker.setAnimation(null), 700);
         }
     }
+    /*
     //Wikipedia API
     function loadData(str) {
         // load wikipedia data
@@ -144,6 +145,43 @@ function addMarker(loc) {
                 clearTimeout(wikiRequestTimeout);
             }
         });
+        return false;
+    }*/
+/////////////////////////////////////////////////////
+
+
+    //Wikipedia API
+    function loadData(str) {
+        // load wikipedia data
+//        var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
+//        console.log(wikiUrl);
+        var wikiRequestTimeout = setTimeout(function() {
+                    var finder = document.getElementById("content"); //Find the infoWindow.setContent
+            var errorcomment = "Failed to get wikipedia resources"; //Make error commment
+           localStorage.setItem('error', errorcomment)// set error comment in keyname error 
+           var error = localStorage.getItem('error')// get keyname error and contain it in variable error
+            finder.innerHTML = "Failed to get wikipedia resources";//Inside the infoWindow, add error varliable
+        }, 8000);
+
+
+
+                for (var i = 0; i < locations.length; i++) {
+                    articleStr = str;
+                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    var finder = document.getElementById("content"); //Find the infoWindow.setContent
+                    var maker = '<li><a href="' + url + '">' + articleStr + '</a></li>';//Make wikipedia link                    
+                    localStorage.setItem('articlelink', maker)// set maker variable in keyname articlelink
+                    var getdata = localStorage.getItem('articlelink')//get keyname articlelink
+                    console.log(getdata); //test it
+
+                    infoWindow.setContent(getdata);
+
+//        infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div id ="content">' + getdata + '</div>');
+  //                  return getdata[i];
+
+                }
+                clearTimeout(wikiRequestTimeout);
+            
         return false;
     }
 }
