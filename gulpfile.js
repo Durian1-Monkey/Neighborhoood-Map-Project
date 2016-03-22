@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     critical = require('critical').stream;
 
 var    beautify = require('gulp-beautify');
-var    ghPages = require('gulp-gh-pages');
+var    deploy =require('gulp-gh-pages');
 
 gulp.task('default', () => {
     console.log("Helo");
@@ -56,8 +56,8 @@ gulp.task('beautify', function() {
 //Deploy gh-pages
 
 gulp.task('deploy', function() {
-    return gulp.src('dist/**/*')
-    .pipe(ghPages());
+    return gulp.src('./dist/**/*')
+    .pipe(deploy('https://github.com/Durian1-Monkey/Neighborhoood-Map-Project/tree/master', 'origin'));
 });
 
 //Watches JS
