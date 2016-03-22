@@ -9,8 +9,8 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     critical = require('critical').stream;
 
-//var    beautify = require('gulp-beautify');
-var ghPages = require('gulp-gh-pages');
+var    beautify = require('gulp-beautify');
+var    ghPages = require('gulp-gh-pages');
 
 gulp.task('default', () => {
     console.log("Helo");
@@ -44,18 +44,19 @@ gulp.task('critical', function() {
     .pipe(gulp.dest('dist/*.html'))
 });
 
-/*
+
 //Beautify JS file
 gulp.task('beautify', function() {
     gulp.src('src/js/google.js')
     .pipe(beautify({indentSize: 4}))
     .pipe(gulp.dest('src/js/google.js'))
 })
-*/
+
 
 //Deploy gh-pages
+
 gulp.task('deploy', function() {
-    return gulp.src('dist/**/*')
+    return gulp.src('dist/*')
     .pipe(ghPages());
 });
 
@@ -101,5 +102,6 @@ gulp.task('serve', ['js'], function () {
 });
 */
 
-//gulp.task('default', ['watch', 'scripts', 'styles', 'critical', 'beautify']);
-gulp.task('default', ['watch', 'scripts', 'styles', 'critical' ,'deploy']);
+gulp.task('default', ['deploy']);
+//gulp.task('default', ['beautify']);
+//gulp.task('default', ['watch', 'scripts', 'styles', 'critical']);
