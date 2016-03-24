@@ -3,6 +3,7 @@ var map,
     marker,
     iconBase,
     infoWindow,
+    bounds,
     locations = [{
         'Name': 'Terminal 21',
         'lat': '13.737920',
@@ -69,7 +70,8 @@ function initMap() {
     }
     ko.applyBindings(new ViewModel());
 
-
+    bounds = new google.maps.LatLngBounds();
+    infoWindow = new google.maps.InfoWindow();
 }
 
 // Adds a marker to the map and push to the array.
@@ -88,11 +90,10 @@ function addMarker(loc) {
 
     markers.push(marker);
 
-    infoWindow = new google.maps.InfoWindow();
-
     // On click open the infoWindow
     google.maps.event.addListener(marker, 'click', function() {
 
+        infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div id ="content">' + '</div>');
         toggleBounce();
         loadData(loc.Name);
         infoWindow.open(map, loc.marker);
@@ -112,27 +113,34 @@ function addMarker(loc) {
     //Wikipedia API
     function loadData(str) {
         // load wikipedia data
+        var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
+        console.log(wikiUrl);
+
+        // load wikipedia data
         var wikiRequestTimeout = setTimeout(function() {
             var finder = document.getElementById("content"); //Find the infoWindow.setContent
-            var errorcomment = "Failed to get wikipedia resources"; //Make error commment
-            localStorage.setItem('error', errorcomment) // set error comment in keyname error 
-            var error = localStorage.getItem('error') // get keyname error and contain it in variable error
             finder.innerHTML = "Failed to get wikipedia resources"; //Inside the infoWindow, add error varliable
         }, 8000);
 
-        for (var i = 0; i < locations.length; i++) {
-            articleStr = str;
-            var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-            var maker = '<li><a href="' + url + '">' + articleStr + '</a></li>'; //Make wikipedia link                    
-            localStorage.setItem('articlelink', maker) // set maker variable in keyname articlelink
-            var getdata = localStorage.getItem('articlelink') //get keyname articlelink
-            console.log(getdata); //test it
-
+        $.ajax({
+            url: wikiUrl,
+            dataType: "jsonp",
+            jsonp: "callback",
+            success: function(response) {
+                var articleList = response[1];
+                for (var i = 0; i < articleList.length; i++) {
+                    articleStr = articleList[i];
+                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    var maker = '<li><a href="' + wikiUrl + '">' + articleStr + '</a></li>'; //Make wikipedia link                    
+                    localStorage.setItem('articlelink', maker) // set maker variable in keyname articlelink
+                    var getdata = localStorage.getItem('articlelink') //get keyname articlelink
                     infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div id ="content">' + getdata + '</div>');
-        }
-        clearTimeout(wikiRequestTimeout);
-
+                }
+                clearTimeout(wikiRequestTimeout);
+            }
+        });
         return false;
+        bounds.extend(position);
     }
 }
 var ViewModel = function() {
@@ -141,13 +149,7 @@ var ViewModel = function() {
 
     //popped up massages after clicking
     self.Locates = function(box1) {
-        var ref;
-        for (var i = 0; i < locations.length; i++) {
-            if (locations[i].Name == box1.Name) {
-                ref = markers[i];
-                google.maps.event.trigger(ref, 'click');
-            }
-        }
+        google.maps.event.trigger(box1.marker, 'click');
     };
 
     self.query = ko.observable('');
@@ -160,8 +162,7 @@ var ViewModel = function() {
 
                 return true;
             }
-            point.marker.setVisible(false);
-            return false;
+            infoWindow.close();
         });
     });
 };
