@@ -109,44 +109,6 @@ function addMarker(loc) {
             setTimeout(loc.marker.setAnimation(null), 700);
         }
     }
-/*
-    //Wikipedia API
-    function loadData(str) {
-        // load wikipedia data
-        var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
-        console.log(wikiUrl);
-
-        // load wikipedia data
-        var wikiRequestTimeout = setTimeout(function() {
-            var finder = document.getElementById("content"); //Find the infoWindow.setContent
-            finder.innerHTML = "Failed to get wikipedia resources"; //Inside the infoWindow, add error varliable
-        }, 8000);
-
-        $.ajax({
-            url: wikiUrl,
-            dataType: "jsonp",
-            jsonp: "callback",
-            success: function(response) {
-                var articleList = response[1];
-                for (var i = 0; i < articleList.length; i++) {
-                    articleStr = articleList[i];
-                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                    var maker = '<li><a href="' + wikiUrl + '">' + articleStr + '</a></li>'; //Make wikipedia link                    
-                    localStorage.setItem('articlelink', maker) // set maker variable in keyname articlelink
-                    var getdata = localStorage.getItem('articlelink') //get keyname articlelink
-                    infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div id ="content">' + getdata + '</div>');
-                }
-                clearTimeout(wikiRequestTimeout);
-            }
-        });
-        return false;
-    }*/
-//    bounds.extend(position);
-////////////////////////////////////////
-
-
-
-
     //Wikipedia API
     function loadData(str) {
 
@@ -180,9 +142,9 @@ var getdata = localStorage.getItem(loc.Name) //get keyname articlelink
                     var maker = '<li><a href="' + wikiUrl + '">' + articleStr + '</a></li>'; //Make wikipedia link
             var finder = document.getElementById("content"); //Find the infoWindow.setContent
                     localStorage.setItem(loc.Name, maker) // set maker variable in keyname articlelink
+                }
                 finder.innerHTML = maker;
                 console.log("end");
-                }
             clearTimeout(wikiRequestTimeout);
             }
     });
