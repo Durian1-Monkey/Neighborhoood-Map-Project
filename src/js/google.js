@@ -109,7 +109,7 @@ function addMarker(loc) {
             setTimeout(loc.marker.setAnimation(null), 700);
         }
     }
-
+/*
     //Wikipedia API
     function loadData(str) {
         // load wikipedia data
@@ -140,9 +140,57 @@ function addMarker(loc) {
             }
         });
         return false;
-        bounds.extend(position);
+    }*/
+//    bounds.extend(position);
+////////////////////////////////////////
+
+
+
+
+    //Wikipedia API
+    function loadData(str) {
+
+        // load wikipedia data
+        var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + str + '&format=json&callback=wikiCallback';
+        console.log(wikiUrl);
+
+
+var getdata = localStorage.getItem(loc.Name) //get keyname articlelink    
+
+    if(getdata !== null) {
+        console.log('hello');
+        infoWindow.setContent(loc.Name + '<br>' + '<br>' + loc.description + '<br>' + '<br>' + '<div id ="content">' + getdata + '</div>');
+    } else {
+        // load wikipedia data
+        var wikiRequestTimeout = setTimeout(function() {
+            var finder = document.getElementById("content"); //Find the infoWindow.setContent
+            finder.innerHTML = "Failed to get wikipedia resources"; //Inside the infoWindow, add error varliable
+        }, 3000);
+
+        $.ajax({
+            url: wikiUrl,
+            dataType: "jsonp",
+            jsonp: "callback",
+            success: function(response) {
+                var articleList = response[1];
+
+                for (var i = 0; i < articleList.length; i++) {
+                    articleStr = articleList[i];
+                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    var maker = '<li><a href="' + wikiUrl + '">' + articleStr + '</a></li>'; //Make wikipedia link
+            var finder = document.getElementById("content"); //Find the infoWindow.setContent
+                    localStorage.setItem(loc.Name, maker) // set maker variable in keyname articlelink
+                finder.innerHTML = maker;
+                console.log("end");
+                }
+            clearTimeout(wikiRequestTimeout);
+            }
+    });
+        return false;
     }
 }
+}
+
 var ViewModel = function() {
 
     var self = this;
@@ -179,16 +227,3 @@ menu.addEventListener('click', function(e) {
 main.addEventListener('click', function() {
     drawer.classList.remove('open');
 });
-//Resposive design. Sensor for iPhone and Android
-function detectBrowser() {
-    var useragent = navigator.userAgent;
-    var mapdiv = document.getElementById("map");
-
-    if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1) {
-        mapdiv.style.width = '100%';
-        mapdiv.style.height = '100%';
-    } else {
-        mapdiv.style.width = '600px';
-        mapdiv.style.height = '800px';
-    }
-}
