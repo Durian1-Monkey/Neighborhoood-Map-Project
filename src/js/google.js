@@ -135,16 +135,15 @@ var getdata = localStorage.getItem(loc.Name) //get keyname articlelink
             jsonp: "callback",
             success: function(response) {
                 var articleList = response[1];
-
                 for (var i = 0; i < articleList.length; i++) {
                     articleStr = articleList[i];
                     var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                    var maker = '<li><a href="' + wikiUrl + '">' + articleStr + '</a></li>'; //Make wikipedia link
+                    var maker = '<li><a href="' + url + '">' + articleStr + '</a></li>'; //Make wikipedia link
             var finder = document.getElementById("content"); //Find the infoWindow.setContent
                     localStorage.setItem(loc.Name, maker) // set maker variable in keyname articlelink
+                    finder.innerHTML = maker;
                 }
-                finder.innerHTML = maker;
-                console.log("end");
+                console.log(maker);
             clearTimeout(wikiRequestTimeout);
             }
     });
@@ -168,16 +167,14 @@ var ViewModel = function() {
         return ko.utils.arrayFilter(locations, function(point) {
             if (point.Name.toLowerCase().indexOf(self.query().toLowerCase()) >= 0) {
                 point.marker.setVisible(true);
-                console.log(point);
-
                 return true;
             }
             infoWindow.close();
         });
     });
 };
+// Open the drawer when the menu ison is clicked.
 
-/* Open the drawer when the menu ison is clicked.*/
 var menu = document.querySelector('#menu');
 var main = document.querySelector('main');
 var drawer = document.querySelector('#drawer');
