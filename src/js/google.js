@@ -172,6 +172,15 @@ var ViewModel = function() {
             infoWindow.close();
         });
     });
+    //Boolean observalbe to indicate menu visibility state
+    self.menuVisibility = ko.observable(false);
+    //Function to be called by 'click' binding in teh DOM 
+
+    self.toggleMenu = function() {
+        self.menuVisibility(!self.menuVisibility());
+    }
+
+
 };
 // Open the drawer when the menu ison is clicked.
 
