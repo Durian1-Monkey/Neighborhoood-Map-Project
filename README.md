@@ -23,3 +23,6 @@ This is a single-page application featuring a map of my neighborhood and a neigb
 1. Live reload: gulp-livereload
 1. Beautify JS code: gulp-beautify.
 1. Publish : gulp-gh-pages.
+
+##Style Guide
+[Here](http://udacity.github.io/frontend-nanodegree-styleguide/index.html) is the Udacity style guide that I followed.
