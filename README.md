@@ -4,7 +4,7 @@ This is part of the Front-end Web Developer nanodegree from udacity. The project
 
 
 ##Usage
-Access [index.html file](http://durian1-monkey.github.io/Neighborhoood-Map-Project/)
+Access [index.html file](https://cdn.rawgit.com/Durian1-Monkey/Neighborhoood-Map-Project/master/src/index.html)
 
 ##Digest
 This is a single-page application featuring a map of my neighborhood and a neigborhood which I would like to visit. This application has the several functionalities: map markers to identify popular locations and places I love to visit, a search function to easily discover these locations, and a listvies to support simple brwsing of all locations. As additional third-party APIs, Wikipedia articles are provided information about each locations and places. 
