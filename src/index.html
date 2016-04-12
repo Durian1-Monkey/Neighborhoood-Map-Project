@@ -16,7 +16,7 @@
         <form action="#">
             <input placeholder="Search" type="search" data-bind="textInput: query, valueUpdate: 'keyup'" autocomplete="off">
         </form>
-        <span data-bind="click: toggleMenu">Close Menu</span>
+        <span id="cursor" data-bind="click: toggleMenu">Close Menu</span>
 
         <!--List searced-->
         <ul data-bind="foreach: search()" id="list">

@@ -40,6 +40,9 @@ input {
     height: 30px;
     width: 300px;
 }
+#cursor {
+    cursor: pointer;
+}
 .wikipedia-container {
     background-color: rgb(0, 0, 0);
     margin-top: 10%;
