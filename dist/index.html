@@ -2,10 +2,16 @@
 
 <head>
     <title>Neighborhood Map</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300'>
+    <style type="text/css">
+        main,nav{height:100%}nav{color:#999}input,nav{width:300px}#map,body,html{font-family:'Open Sans Condensed',sans-serif;margin:0;padding:0;width:100%;height:95%}a#menu svg{width:40px;fill:#000;flex-grow:0;display:block}nav{background-color:#000;z-index:10;font-size:24px;box-sizing:border-box;position:absolute;-webkit-transform:translate(-300px,0);transform:translate(-300px,0);opacity:.7}main{width:100%}input{background-color:#fff;background-image:none;height:30px}
+    </style>
+    <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"></noscript>
+    <script>!function(e){"use strict";var t=function(t,n,r){function o(e){if(i.body)return e();setTimeout(function(){o(e)})}function a(){d.addEventListener&&d.removeEventListener("load",a),d.media=r||"all"}var l,i=e.document,d=i.createElement("link");if(n)l=n;else{var s=(i.body||i.getElementsByTagName("head")[0]).childNodes;l=s[s.length-1]}var u=i.styleSheets;d.rel="stylesheet",d.href=t,d.media="only x",o(function(){l.parentNode.insertBefore(d,n?l:l.nextSibling)});var f=function(e){for(var t=d.href,n=u.length;n--;)if(u[n].href===t)return e();setTimeout(function(){f(e)})};return d.addEventListener&&d.addEventListener("load",a),d.onloadcssdefined=f,f(a),d};"undefined"!=typeof exports?exports.loadCSS=t:e.loadCSS=t}("undefined"!=typeof global?global:this),function(e){if(e.loadCSS){var t=loadCSS.relpreload={};if(t.support=function(){try{return e.document.createElement("link").relList.supports("preload")}catch(e){return!1}},t.poly=function(){for(var t=e.document.getElementsByTagName("link"),n=0;n<t.length;n++){var r=t[n];"preload"===r.rel&&"style"===r.getAttribute("as")&&(e.loadCSS(r.href,r,r.getAttribute("media")),r.rel=null)}},!t.support()){t.poly();var n=e.setInterval(t.poly,300);e.addEventListener&&e.addEventListener("load",function(){t.poly(),e.clearInterval(n)}),e.attachEvent&&e.attachEvent("onload",function(){e.clearInterval(n)})}}}(this);</script>
 </head>
 
 <body>
@@ -25,8 +31,8 @@
     </nav>
     <main class="light-blue">
         <a id="menu" data-bind="click: toggleMenu">
-            <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+                <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
             </svg>
         </a>
         <div id="map"></div>
@@ -45,8 +51,7 @@
     <!--This is the script which could be the engine of googlemap-->
     <script src="js/google.js"></script>
     <!--This is google map apis.-->
-    <script async type="text/javascript" onerror="googleError()" src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+    <script async type="text/javascript" onerror="googleError()" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAICS-QSHxjgI-S3V7q8gdFDM2zvefd_1M&callback=initMap"></script>
 
 </body>
 
-</html>
