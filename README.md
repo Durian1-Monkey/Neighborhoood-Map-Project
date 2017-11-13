@@ -1,15 +1,15 @@
-#Udacity Project5-1: Neighborhoood-Map-Project
+# Udacity Project5-1: Neighborhoood-Map-Project
 This is part of the Front-end Web Developer nanodegree from udacity. The project utilizes [Intro to AJAX](https://www.udacity.com/course/viewer#!/c-ud110-nd) and [JavaScript Design Patterns](https://www.udacity.com/course/viewer#!/c-ud989-nd)
 
 
 
-##Usage
+## Usage
 Access [index.html file](https://cdn.rawgit.com/Durian1-Monkey/Neighborhoood-Map-Project/master/src/index.html)
 
-##Digest
+## Digest
 This is a single-page application featuring a map of my neighborhood and a neigborhood which I would like to visit. This application has the several functionalities: map markers to identify popular locations and places I love to visit, a search function to easily discover these locations, and a listvies to support simple brwsing of all locations. As additional third-party APIs, Wikipedia articles are provided information about each locations and places. 
 
-##Frameworks and APIs
+## Frameworks and APIs
 1. HTML, CSS, JavaScript
 1. jQuery
 1. KnockoutJS
@@ -24,5 +24,5 @@ This is a single-page application featuring a map of my neighborhood and a neigb
 1. Beautify JS code: gulp-beautify.
 1. Publish : gulp-gh-pages.
 
-##Style Guide
+## Style Guide
 [Here](http://udacity.github.io/frontend-nanodegree-styleguide/index.html) is the Udacity style guide that I followed.
